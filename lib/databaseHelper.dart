@@ -90,7 +90,7 @@ class Offer {
 }
 
 class DatabaseHelper{
-  String serverIp = "192.168.45.85";
+  String serverIp = "192.168.50.85";
   DatabaseHelper._privateConstructor();
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
