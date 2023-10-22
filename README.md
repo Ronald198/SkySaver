@@ -2,9 +2,11 @@
 This app made for JunctionX Tirana 2023 Hackathon. 
 Challenge was provided by Lufthansa Industry Solutions. 
 Developed by Ronald Lamani and Daniel Bundo. 
+
 Created with:
  -Frontend: Flutter
  -Backend: XAMPP and PhP
+
 Hope you like it! ;)
 
 # Welcome to SkySaver
