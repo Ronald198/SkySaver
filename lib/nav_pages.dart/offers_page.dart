@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_app/databaseHelper.dart';
+import 'package:travel_app/models/tab_bar_model.dart';
 import 'package:travel_app/pages/details_page.dart';
 import 'package:travel_app/widget/reuseable_text.dart';
 
@@ -33,32 +34,34 @@ class OffersPage extends StatelessWidget {
                 height: size.height,
                 child: Padding(
                   padding: padding,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const AppText(
-                        text: "Offers",
-                        size: 35,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: offers.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 8),
-                              child: FadeInUp(
-                                delay: Duration(milliseconds: 150 * index + 150),
-                                child: HorizontalOfferTab(offer: offers[index])
-                              ),
-                            );
-                          },
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const AppText(
+                          text: "Offers",
+                          size: 35,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Column(
+                            children: [
+                              for (int i = 0; i < offers.length; i++) ...[
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8),
+                                  child: FadeInUp(
+                                    delay: Duration(milliseconds: 150 * i + 150),
+                                    child: HorizontalOfferTab(offer: offers[i])
+                                  ),
+                                )
+                              ]
+                            ],
+                          )
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -118,18 +121,20 @@ class HorizontalOfferTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TabBarModel tabData = TabBarModel(title: offer.offer_destination, location: offer.offer_state, image: "assets/places/${offer.offer_destination}.jpg", price: offer.offer_price, miles: offer.offer_miles, url: offer.offer_url);
+
     var size = MediaQuery.of(context).size;
     return GestureDetector(
-      // onTap: () => Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => DetailsPage(
-      //       personData: null,
-      //       tabData: current,
-      //       isCameFromPersonSection: false,
-      //     ),
-      //   ),
-      // ),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetailsPage(
+            personData: null,
+            tabData: tabData,
+            isCameFromPersonSection: false,
+          ),
+        ),
+      ),
       child: Stack(
         alignment: Alignment.bottomLeft,
         children: [
@@ -137,7 +142,8 @@ class HorizontalOfferTab extends StatelessWidget {
             tag: offer.offer_id,
             child: Container(
               margin: const EdgeInsets.all(10.0),
-              width: size.width * 0.6,
+              width: double.infinity,
+              height: 180,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 image: DecorationImage(
@@ -173,10 +179,20 @@ class HorizontalOfferTab extends StatelessWidget {
           ),
           Positioned(
             left: size.width * 0.07,
-            bottom: size.height * 0.045,
+            bottom: size.height * 0.055,
             child: AppText(
-              text: offer.offer_url,
-              size: 15,
+              text: "€${offer.offer_price.toString()}",
+              size: 32,
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          Positioned(
+            right: size.width * 0.07,
+            top: size.height * 0.025,
+            child: AppText(
+              text: "${offer.offer_discount.toString()}% off",
+              size: 28,
               color: Colors.white,
               fontWeight: FontWeight.w400,
             ),
@@ -189,14 +205,14 @@ class HorizontalOfferTab extends StatelessWidget {
                 const Icon(
                   Icons.location_on,
                   color: Colors.white,
-                  size: 15,
+                  size: 22,
                 ),
                 SizedBox(
                   width: size.width * 0.01,
                 ),
                 AppText(
                   text: offer.offer_destination,
-                  size: 12,
+                  size: 18,
                   color: Colors.white,
                   fontWeight: FontWeight.w400,
                 ),

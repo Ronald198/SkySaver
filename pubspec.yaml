@@ -21,6 +21,19 @@ dependencies:
   coupon_uikit: ^0.2.0
   intl: ^0.18.1
   font_awesome_flutter: ^10.6.0
+  qr_flutter: ^4.1.0
+  url_launcher: ^6.1.14
+  flutter_native_splash: ^2.3.1
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  image_path: "assets/logo.jpeg"
+  adaptive_icon_background: "#FFFFFF"
+  android: true
+
+flutter_native_splash:
+  image: assets/logo.jpeg
+  color: '#FFFFFF'
 
 dev_dependencies:
   flutter_test:
@@ -34,7 +47,9 @@ flutter:
   assets:
     - assets/images/
     - assets/welcomePage/
+    - assets/profilePage/
     - assets/places/
+    - assets/gifts/
 
   # fonts:
   #   - family: Schyler

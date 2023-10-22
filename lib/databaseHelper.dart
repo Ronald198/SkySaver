@@ -62,6 +62,7 @@ class Coupon {
 class Offer {
   final int offer_id;
   final String offer_destination;
+  final String offer_state;
   final int offer_price;
   final int offer_discount;
   final int offer_miles;
@@ -70,6 +71,7 @@ class Offer {
   Offer({
     required this.offer_id,
     required this.offer_destination,
+    required this.offer_state,
     required this.offer_price,
     required this.offer_discount,
     required this.offer_miles,
@@ -79,6 +81,7 @@ class Offer {
   factory Offer.fromMap(Map<String, dynamic> json) => Offer(
     offer_id: int.parse(json['offer_id']),
     offer_destination: json['offer_destination'],
+    offer_state: json['offer_state'],
     offer_price: int.parse(json['offer_price']),
     offer_discount: int.parse(json['offer_discount']),
     offer_miles: int.parse(json['offer_miles']),
@@ -87,11 +90,12 @@ class Offer {
 }
 
 class DatabaseHelper{
+  String serverIp = "192.168.45.85";
   DatabaseHelper._privateConstructor();
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
   Future<List<Offer>> getAllOffers() async {
-    Uri uri = Uri.parse('http://192.168.45.85/skysaverapi/getAllOffers.php');
+    Uri uri = Uri.parse('http://$serverIp/skysaverapi/getAllOffers.php');
     var res = await http.get(uri, headers: {'Accept':'application/json'});
     var resultRaw = jsonDecode(res.body) as List;
     List<Offer> Users = resultRaw.isNotEmpty ? resultRaw.map((e) => Offer.fromMap(e)).toList() : [];
@@ -107,7 +111,7 @@ class DatabaseHelper{
       'user_skypoints' : User.user_skypoints.toString(),
     };
 
-    Uri uri = Uri.parse('http://192.168.45.85/skysaverapi/insertNewUser.php');
+    Uri uri = Uri.parse('http://$serverIp/skysaverapi/insertNewUser.php');
 
     try
     {
@@ -126,7 +130,7 @@ class DatabaseHelper{
       'user_email': user_email,
     };
 
-    Uri uri = Uri.parse('http://192.168.45.85/skysaverapi/getUserByUserEmail.php').replace(queryParameters: queryParameters);
+    Uri uri = Uri.parse('http://$serverIp/skysaverapi/getUserByUserEmail.php').replace(queryParameters: queryParameters);
     var res = await http.get(uri, headers: {'Accept':'application/json'});
 
     if(res.body.substring(0, 10) != '[{"user_id')
@@ -146,7 +150,7 @@ class DatabaseHelper{
       'user_id': user_id.toString(),
     };
 
-    Uri uri = Uri.parse('http://192.168.45.85/skysaverapi/getCouponsByUserId.php').replace(queryParameters: queryParameters);
+    Uri uri = Uri.parse('http://$serverIp/skysaverapi/getCouponsByUserId.php').replace(queryParameters: queryParameters);
     var res = await http.get(uri, headers: {'Accept':'application/json'});
 
     if(res.body.substring(0, 12) != '[{"coupon_co')

@@ -3,12 +3,14 @@ class TabBarModel {
   final String location;
   final String image;
   final int price;
+  final String? url;
+  final int? miles;
 
   TabBarModel(
       {required this.title,
       required this.location,
       required this.image,
-      required this.price});
+      required this.price, this.url, this.miles});
 }
 
 List<TabBarModel> places = [

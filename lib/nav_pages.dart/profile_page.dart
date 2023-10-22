@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:travel_app/constants.dart';
 import 'package:travel_app/databaseHelper.dart';
 import 'package:travel_app/main.dart';
+import 'package:travel_app/nav_pages.dart/profileSubPage/gifts_page.dart';
+import 'package:travel_app/nav_pages.dart/profileSubPage/tiers_page.dart';
 import 'package:travel_app/widget/reuseable_text.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -99,73 +101,76 @@ class _ProfilePageState extends State<ProfilePage> {
                       )
                     ],
                   ),
-                  Padding( // KARTA
-                    padding: const EdgeInsets.only(top: 20),
-                    child: Column(
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          height: 255,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage("assets/profilePage/cardWave.jpg"),
-                              fit: BoxFit.cover
-                            ),
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(55),
-                            ),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(StaticVariables.userLoggedIn!.user_name, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w300),),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 4),
-                                          child: Text(tier, style: const TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w400),),
-                                        ),
-                                      ],
-                                    ),
-                                    const Text("SkyClub", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),),
-                                  ],
-                                ),
+                  FadeInDown(
+                    delay: const Duration(milliseconds: 150),
+                    child: Padding( // KARTA
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            height: 255,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage("assets/profilePage/cardWave.jpg"),
+                                fit: BoxFit.cover
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 16, bottom: 16, right: 24),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text("${StaticVariables.userLoggedIn!.user_skypoints} SkyPoints", style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w400),),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 4),
-                                          child: Text(advanceMessage, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w300),),
-                                        ),
-                                      ],
-                                    ),
-                                    // const Text("SkyClub", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),),
-                                  ],
-                                ),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                                bottomLeft: Radius.circular(20),
+                                bottomRight: Radius.circular(55),
                               ),
-                            ],
-                          ),
-                        )
-                      ],
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(StaticVariables.userLoggedIn!.user_name, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w300),),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 4),
+                                            child: Text(tier, style: const TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w400),),
+                                          ),
+                                        ],
+                                      ),
+                                      const Text("SkyClub", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 16, bottom: 16, right: 24),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text("${StaticVariables.userLoggedIn!.user_skypoints} SkyPoints", style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w400),),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 4),
+                                            child: Text(advanceMessage, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w300),),
+                                          ),
+                                        ],
+                                      ),
+                                      // const Text("SkyClub", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   Padding(
@@ -174,40 +179,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Container(
-                          width: 200,
-                          height: 140,
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(Radius.circular(24)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset: const Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                            color: Colors.white
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text("Miles travelled:", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 19),),
-                                Text(StaticVariables.userLoggedIn!.user_miles.toString(), style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w200),),
-                              ],
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-
-                          },
-                          borderRadius: const BorderRadius.all(Radius.circular(24)),
-                          child: Ink(
-                            width: 145,
+                        FadeInLeft(
+                          delay: const Duration(milliseconds: 300),
+                          child: Container(
+                            width: 200,
                             height: 140,
                             decoration: BoxDecoration(
                               borderRadius: const BorderRadius.all(Radius.circular(24)),
@@ -221,72 +196,119 @@ class _ProfilePageState extends State<ProfilePage> {
                               ],
                               color: Colors.white
                             ),
-                            child: const Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Icon(Icons.auto_graph, size: 40,),
-                                Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: Text("Tiers", style: TextStyle(fontSize: 24),),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text("Miles travelled:", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 19),),
+                                  Text(StaticVariables.userLoggedIn!.user_miles.toString(), style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w200),),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        FadeInRight(
+                          delay: const Duration(milliseconds: 300),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context) => 
+                                  const TiersPage(),
                                 )
-                              ],
+                              );
+                            },
+                            borderRadius: const BorderRadius.all(Radius.circular(24)),
+                            child: Ink(
+                              width: 145,
+                              height: 140,
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(Radius.circular(24)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: const Offset(0, 3), // changes position of shadow
+                                  ),
+                                ],
+                                color: Colors.white
+                              ),
+                              child: const Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Icon(Icons.auto_graph, size: 40,),
+                                  Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text("Tiers", style: TextStyle(fontSize: 24),),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: InkWell(
-                      onTap: () {
-                        
-                      },
-                      borderRadius: const BorderRadius.all(Radius.circular(24)),
-                      child: Ink(
-                        width: double.infinity,
-                        height: 140,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(Radius.circular(24)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 5,
-                              blurRadius: 7,
-                              offset: const Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                          image: const DecorationImage(
-                            image: AssetImage("assets/profilePage/awardWave.jpg"),
-                            fit: BoxFit.cover
-                          ),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CircleAvatar(
-                                    backgroundColor: Color.fromARGB(232, 255, 255, 255),
-                                    radius: 32,
-                                    child: FaIcon(
-                                      FontAwesomeIcons.gift,
-                                      color: SkySaverPalette.mainColor,
-                                      size: 26,
-                                    )
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 20),
-                                    child: Text("View your gifts", style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.w200),),
-                                  )
-                                ],
+                  FadeInUp(
+                    delay: const Duration(milliseconds: 300),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => 
+                              const GiftsPage(),
+                            )
+                          );
+                        },
+                        borderRadius: const BorderRadius.all(Radius.circular(24)),
+                        child: Ink(
+                          width: double.infinity,
+                          height: 140,
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(Radius.circular(24)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: const Offset(0, 3), // changes position of shadow
                               ),
                             ],
+                            image: const DecorationImage(
+                              image: AssetImage("assets/profilePage/awardWave.jpg"),
+                              fit: BoxFit.cover
+                            ),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.all(16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CircleAvatar(
+                                      backgroundColor: Color.fromARGB(232, 255, 255, 255),
+                                      radius: 32,
+                                      child: FaIcon(
+                                        FontAwesomeIcons.gift,
+                                        color: SkySaverPalette.mainColor,
+                                        size: 26,
+                                      )
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 20),
+                                      child: Text("View your milestones", style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w200),),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -486,7 +508,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Container(
                           decoration: const BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage("assets/images/membershipBg.png"),
+                              image: AssetImage("assets/profilePage/membershipBg.png"),
                               fit: BoxFit.cover,
                             ),
                             borderRadius: BorderRadius.all(Radius.circular(18)),

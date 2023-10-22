@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
  
 import '../models/people_also_like_model.dart';
 import '../models/tab_bar_model.dart';
@@ -23,6 +24,7 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   int selected = 0;
+  bool isLiked = false;
   final EdgeInsetsGeometry padding =
       const EdgeInsets.symmetric(horizontal: 20.0);
   dynamic current;
@@ -224,6 +226,17 @@ class _DetailsPageState extends State<DetailsPage> {
                         ),
                       ),
                       SizedBox(height: size.height * 0.02),
+                      if (current.miles != null) ...[
+                        FadeInUp(
+                          delay: const Duration(milliseconds: 800),
+                          child: AppText(
+                            text: "Miles: ${current.miles.toString()}",
+                            size: 21,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
                       FadeInUp(
                         delay: const Duration(milliseconds: 800),
                         child: const AppText(
@@ -251,19 +264,26 @@ class _DetailsPageState extends State<DetailsPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Container(
+                              AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
                                   width: size.width * 0.14,
                                   height: size.height * 0.06,
                                   decoration: BoxDecoration(
                                       border: Border.all(
                                           color: Colors.deepPurpleAccent,
                                           width: 2),
-                                      borderRadius: BorderRadius.circular(10)),
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: isLiked ? Colors.deepPurpleAccent : Colors.white,
+                                      ),
                                   child: IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.favorite_border,
-                                      color: Colors.deepPurpleAccent,
+                                    onPressed: () async{
+                                      setState(() {
+                                        isLiked = !isLiked;
+                                      });
+                                    },
+                                    icon: Icon(
+                                      !isLiked ? Icons.favorite_outline : Icons.favorite,
+                                      color: !isLiked ? Colors.deepPurpleAccent : Colors.white,
                                     ),
                                   )),
                               MaterialButton(
@@ -273,12 +293,23 @@ class _DetailsPageState extends State<DetailsPage> {
                                 minWidth: size.width * 0.6,
                                 height: size.height * 0.06,
                                 color: Colors.deepPurpleAccent,
-                                onPressed: () {},
-                                child: const AppText(
-                                  text: "Book Trip Now",
-                                  size: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w300,
+                                onPressed: () async {
+                                  if (current.url != null)
+                                  {
+                                    Uri uri = Uri.parse(current.url);
+                                    if (!await launchUrl(uri, mode: LaunchMode.inAppWebView)) {
+                                      throw Exception('Could not launch ${current.url}');
+                                    }
+                                  }
+                                },
+                                child: GestureDetector(
+
+                                  child: const AppText(
+                                    text: "Book Trip Now",
+                                    size: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w300,
+                                  ),
                                 ),
                               ),
                             ],
